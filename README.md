@@ -34,7 +34,7 @@ Apply changes to the Terraform backend infrastructure configuration:
 terraform apply
 ```
 
-After applying terraform changes the new or modified terraform workspace state files need to be checked into source control.
+After applying terraform changes the new or modified terraform state files need to be checked into source control.
 
 ## Design
 
@@ -48,5 +48,3 @@ The following resources are created as part of this project:
 * a S3 bucket to host terraform state files
 * a DynamoDB table used for ensuring terraform changes to a single workspace do not happen concurrently
 * a IAM policy and role for the landing zone account (master) to use the terraform state backend
-
-A terraform state management role is created in shared services and delegated to the IAM root in the master account. Permissions can be applied to relevant groups in master to be able to assume this role in shared services.
