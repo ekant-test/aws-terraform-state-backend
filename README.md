@@ -4,21 +4,29 @@ This project configures the terraform state backend to manage core AWS infrastru
 
 The project will only create minimal resources to allow the landing zone to be run.
 
+This template requires existing role in shared service account if not created by aws control tower.
+
+
+
 ## Usage
 
-**IMPORTANT:** This terraform project must be run from the master account with credentials that allow administrative cross account access to the shared services account. The credentials must be allowed to assume IAM role configured in `cross_account_execution_role` which is located in the shared services account.
+**IMPORTANT:** This terraform project must be run from the master account with credentials that allow administrative cross account access to the shared services account. The credentials must be allowed to assume IAM role configured in `cross_account_execution_role` which is located in the shared services account.The role has to be created manually in shared service account if not created by aws control tower.
 
 
-Prepare the workspace before terraform can be used to apply the infrastructure:
+Prepare the environment before terraform can be used to apply the infrastructure:
 
 ```sh
+# name the region to operate in.
+export AWS_DEFAULT_REGION=ap-southeast-2
 # check you are in the master account with a suitable role
 aws sts get-caller-identity
 # name the cloud environment to operate in
 export CLOUD_ID=awscloud
 # activate the workspace for one of the configured environments
 terraform init
+
 ```
+
 
 Apply changes to the Terraform backend infrastructure configuration:
 
